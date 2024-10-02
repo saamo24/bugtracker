@@ -1,18 +1,11 @@
-from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework import generics, status, viewsets
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .serializers import RegisterSerializer, ChangePasswordSerializer, UserUpdateSerializer
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
 from rest_framework.response import Response
 from django.contrib.auth import update_session_auth_hash
 from .models import User
-
-from rest_framework.permissions import IsAdminUser
-from rest_framework import viewsets
-
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
-
 
 
 class RegisterView(generics.CreateAPIView):

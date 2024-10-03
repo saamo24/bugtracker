@@ -1,10 +1,8 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import TicketViewSet
-
-router = DefaultRouter()
-router.register(r'tickets', TicketViewSet)
+from django.urls import path
+from .views import TicketCreateView, TicketRetrieveUpdateDestroyView, TicketListView
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('tickets/', TicketListView.as_view(), name='ticket-list'),
+    path('tickets/<int:number>/', TicketRetrieveUpdateDestroyView.as_view(), name='ticket-detail'),
+    path('tickets/create/', TicketCreateView.as_view(), name='ticket-create'),
 ]

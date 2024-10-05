@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'altjira',
         'USER': 'student',
         'PASSWORD': 'student',
-        'HOST': 'localhost', #db localhost
+        'HOST': 'db', #db localhost
         'PORT': '5432',
     }
 }

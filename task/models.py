@@ -1,48 +1,7 @@
-# from django.db import models
-# from user.models import User
-
-# # Create your models here.
-
-# class Ticket(models.Model):
-    
-#     TYPE_CHOICES = [
-#     ('bug', 'Bug'),
-#     ('task', 'Task')
-#     ]
-
-#     PRIORITY_CHOICES = [
-#     ('critical', 'Critical'),
-#     ('high', 'High'),
-#     ('medium', 'Medium'),
-#     ('low', 'Low')
-#     ]
-    
-#     STATUS_CHOICES = [
-#     ('open', 'Open'),
-#     ('in_progress', 'In Progress'),
-#     ('closed', 'Closed'),
-#     ('resolved', 'Resolved')
-#     ]
-    
-#     number = models.AutoField(primary_key=True)  # Automatically generated
-#     task_type = models.CharField(max_length=10, choices=TYPE_CHOICES)
-#     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
-#     status = models.CharField(max_length=15, choices=STATUS_CHOICES)
-#     title = models.CharField(max_length=255)
-#     description = models.TextField(blank=True, null=True)
-#     assignee = models.ForeignKey(User, related_name='tasks_assigned', on_delete=models.SET_NULL, null=True, blank=True)
-#     creator = models.ForeignKey(User, related_name='tasks_created', on_delete=models.CASCADE)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#     attachment = models.URLField(max_length=255, blank=True)
-#     blocking_tasks = models.ManyToManyField('self', symmetrical=False, blank=True, related_name='blocked_by')
-
-
-
 from django.db import models
 from uuid import uuid4
 from django.utils import timezone
-from user.models import User  # Assuming User model is in the user app
+from user.models import User
 
 
 class Ticket(models.Model):

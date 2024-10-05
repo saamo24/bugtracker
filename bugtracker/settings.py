@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
 
+    'drf_yasg',
+
     'user',
     'task',
 ]
@@ -110,6 +112,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# settings.py
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        }
+    },
+    }
 
 
 # Internationalization

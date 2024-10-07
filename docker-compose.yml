@@ -1,0 +1,166 @@
+# # version: "3.9"
+
+# # services:
+# #   db:
+# #     image: postgres
+# #     volumes:
+# #       - blog-data:/var/lib/postgresql/data/ #using a volume
+# #     environment:
+# #       - POSTGRES_NAME=blog
+# #       - POSTGRES_USER=blogger
+# #       - POSTGRES_PASSWORD=Blogger123~
+# #       - POSTGRES_DB=blog
+# #     ports:
+# #       - "5432:5432"
+
+# # #  checkers-db:
+# # #    image: postgres
+# # #    volumes:
+# # #      - ./data/checkers-db:/var/lib/postgresql/data
+# # #    environment:
+# # #      - POSTGRES_NAME=checkers-db
+# # #      - POSTGRES_USER=postgres
+# # #      - POSTGRES_PASSWORD=postgres
+# # #    ports:
+# # #      - "5433:5432"
+
+# #   api:
+# #     build: 
+# #       context: .
+# #       dockerfile: Dockerfile.backend
+# #     command: python manage.py runserver 0.0.0.0:8000
+# #     # command: tree -L 1 .
+# #     # volumes:
+# #     # - .:/app/
+# #     ports:
+# #       - "8000:8000"
+# #     environment:
+# #       - ENVIRONMENT=server.settings.local
+# #       - HOST_URL=0.0.0.0
+# #       - HOST_PORT=8000
+# #       # - FRONTEND_URL=http://127.0.0.1:3000
+# #       # - BACKEND_URL=http://127.0.0.1:8000
+# #       - FRONTEND_URL=http://frontend_app:3000
+# #       - BACKEND_URL=http://api:8000
+# #       - DB_HOST=db
+# #       - DB_NAME=blog
+# #       - DB_USER=blogger
+# #       - DB_PASSWORD=Blogger123~
+# #       - DB_PORT=5432
+# #       # - ACCOUNT_EMAIL_HOST=smtp.gmail.com
+# #       # - ACCOUNT_EMAIL_PORT=587
+# #       # - ACCOUNT_EMAIL_HOST_USER=vachagan.grigoryan.it@gmail.com
+# #       # - ACCOUNT_EMAIL_HOST_PASSWORD=xnucurfpaoaeksrk
+# #       # - USE_SPACES=True
+# #       # - AWS_ACCESS_KEY_ID=QAMFHOEL3XRCIPN7B3IU
+# #       # - AWS_SECRET_ACCESS_KEY=vZW5ETezng4/tzW5eFxJTlnFdZruG3P2CdYG49xx1uY
+# #       # - AWS_STORAGE_BUCKET_NAME=allof-dev
+# #     depends_on:
+# #       - db
+
+
+# #   frontend_app:
+# #     build:
+# #       context: .
+# #       dockerfile: Dockerfile.frontend
+# #     ports:
+# #       - "3000:3000"
+
+# # volumes:
+# #   blog-data:
+
+# version: "3.9"
+
+# services:
+#   db:
+#     image: postgres
+#     volumes:
+#       - blog-data:/var/lib/postgresql/data/
+#     environment:
+#       - POSTGRES_NAME=altjira
+#       - POSTGRES_USER=student
+#       - POSTGRES_PASSWORD=student
+#       - POSTGRES_DB=altjira
+#     ports:
+#       - "5432:5432"
+#     # networks:
+#     #   - my_network
+
+#   api:
+#     build: 
+#       context: .
+#       dockerfile: Dockerfile
+#     command: python manage.py runserver 0.0.0.0:8000
+#     ports:
+#       - "8000:8000"
+#     environment:
+#       - ENVIRONMENT=server.settings.local
+#       - HOST_URL=0.0.0.0
+#       - HOST_PORT=8000
+#       # - FRONTEND_URL=http://frontend_app:3000
+#       - BACKEND_URL=http://api:8000
+#       - DB_HOST=db
+#       - DB_NAME=altjira
+#       - DB_USER=student
+#       - DB_PASSWORD=student
+#       - DB_PORT=5432
+#     depends_on:
+#       - db
+#     # networks:
+#     #   - my_network
+
+# #   frontend_app:
+# #     build:
+# #       context: .
+# #       dockerfile: Dockerfile.frontend
+# #     ports:
+# #       - "3000:3000"
+# #     networks:
+# #       - my_network
+
+# volumes:
+#   blog-data:
+
+# # networks:
+# #   my_network:
+# #     driver: bridge
+
+
+
+
+version: '3.8'  # Specify the Docker Compose version
+
+services:
+  db:
+    image: postgres:latest  # Use the latest PostgreSQL image
+    volumes:
+      - altjira-data:/var/lib/postgresql/data/  # Persist data between container restarts
+    environment:
+      - POSTGRES_DB=altjira  # Database name
+      - POSTGRES_USER=student  # Database user
+      - POSTGRES_PASSWORD=student  # Database password
+    ports:
+      - "5432:5432"  # Expose the PostgreSQL port
+
+  api:
+    build: 
+      context: .  # Context for the build
+      dockerfile: Dockerfile  # Path to the Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"  # Expose the Django API port
+    environment:
+      - ENVIRONMENT=server.settings.local  # Specify environment settings
+      - HOST_URL=0.0.0.0  # Host URL
+      - HOST_PORT=8000  # Host Port
+      - BACKEND_URL=http://api:8000  # URL for the backend service
+      - DB_HOST=db  # Database host (service name)
+      - DB_NAME=altjira  # Database name
+      - DB_USER=student  # Database user
+      - DB_PASSWORD=student  # Database password
+      - DB_PORT=5432  # Database port
+    depends_on:
+      - db  # Ensure the database service starts before the API service
+
+volumes:
+  altjira-data:  # Define a named volume to persist database data

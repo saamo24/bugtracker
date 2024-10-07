@@ -91,7 +91,7 @@ Tasks can transition to "To do" or "Wontfix" from any status.
 - **List Tasks**: `/api/tickets/` [GET]  
   Returns a list of all tasks, with optional filters (type, status, creator, assignee).
 
-- **Create Task**: `/api/tickets/` [POST]  
+- **Create Task**: `/api/tickets/create` [POST]  
   Allows users to create a new task.
 
 - **View Task**: `/api/tickets/{id}/` [GET]  

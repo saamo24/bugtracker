@@ -6,6 +6,7 @@ from django.contrib.auth import update_session_auth_hash
 from .models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
+from permissions import IsManager
 
 
 class RegisterView(generics.CreateAPIView):
@@ -41,7 +42,7 @@ class ChangePasswordView(generics.UpdateAPIView):
 class UserManageViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsManager]
 
 
 class LogoutView(APIView):
@@ -49,10 +50,10 @@ class LogoutView(APIView):
 
     def post(self, request):
         try:
-            refresh_token = request.data["refresh"]
+            refresh_token = request.data["refresh_token"]
             token = RefreshToken(refresh_token)
             token.blacklist()
 
-            return Response(status=status.HTTP_205_RESET_CONTENT)
+            return Response(status=205)
         except Exception as e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=400)

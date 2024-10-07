@@ -148,34 +148,10 @@ Tasks can transition to "To do" or "Wontfix" from any status.
    docker-compose up --build
    ```
 
-4. **Apply Migrations**:
-
-   Once the containers are up, apply the migrations:
-
-   ```bash
-   docker-compose exec web python manage.py migrate
-   ```
-
-5. **Create a Superuser** (optional):
-
-   ```bash
-   docker-compose exec web python manage.py createsuperuser
-   ```
-
 6. **Access the Application**:
 
    - The API will be accessible at `http://localhost:8000/api/`.
    - Swagger documentation will be accessible at `http://localhost:8000/swagger/`.
-
----
-
-## Testing
-
-- **Unit Tests**: To run unit tests, use the following command:
-
-   ```bash
-   docker-compose exec web python manage.py test
-   ```
 
 ---
 
